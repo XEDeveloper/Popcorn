@@ -19,10 +19,13 @@ class DetailsController: UIViewController {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var genresLabel: UILabel!
     
     var movie: MovieDetail!
     
     var videos: [NSDictionary] = []
+    
+    var seasons: [String] = []
 //    var videos: [String] = []
     
     // MARK: - View Life Cycle
@@ -33,6 +36,7 @@ class DetailsController: UIViewController {
         // Do any additional setup after loading the view.
         
         if movie != nil {
+            print(movie.id!)
             backdropPhoto.setImageFrom(url: moviePhoto(isCover: true))
             backgroundImageView.setImageFrom(url: moviePhoto(isCover: false))
             titleLabel.text = movie.title
@@ -46,7 +50,7 @@ class DetailsController: UIViewController {
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             backgroundImageView.addSubview(blurEffectView)
             
-            fireVideos()
+            fireShowDetails()
         }
         
         let bgView = UIView(frame: CGRect(x: 4, y: 4, width: backButton.bounds.width - 8, height: backButton.bounds.height - 8))
@@ -70,6 +74,7 @@ class DetailsController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         return true
+//        return UIScreen.main.nativeBounds.height >= 2436 ? false : true
     }
     
     func moviePhoto(isCover: Bool) -> String {
@@ -85,12 +90,20 @@ class DetailsController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func fireVideos() {
+    func details() -> String {
+        var detailsString = "videos"
+        detailsString = detailsString + ",seasons"
+        
+        return detailsString
+    }
+    
+    func fireShowDetails() {
         
         if let movieID = movie.id {
             let manager = APIManager()
-            manager.getMovieVideos(id: movieID, onSuccess: { json in
-                let results = json["results"].array
+            manager.getShowDetails(id: movieID, details: details(), onSuccess: { json in
+//                print(json)
+                let results = json["videos"]["results"].array
                 var ctr = 1
                 for item in results! {
                     self.videos.append(["title": item["name"].stringValue, "link": item["key"].stringValue])
@@ -104,6 +117,12 @@ class DetailsController: UIViewController {
                     self.view.addSubview(videoLabel)
                     ctr += 1
                 }
+                
+                let seasons = json["seasons"].array
+                for season in seasons! {
+                    self.seasons.append("Season \(season["season_number"].int! + 1) - Episodes: \(season["episode_count"].int!)")
+                }
+                print(self.seasons)
             }, onFailure: { error in
                 print(error)
             })

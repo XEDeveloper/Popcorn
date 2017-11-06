@@ -29,7 +29,7 @@ class ListController: UIViewController, ListControllerInput {
     var hasPendingRequest = false
     
     var selectedItems = 0
-    var movies: [MovieDetail] = []
+    var shows: [MovieDetail] = []
     
     //
     var output: ListControllerOutput!
@@ -57,11 +57,13 @@ class ListController: UIViewController, ListControllerInput {
         
 //        output.fetchItems(request: ListModel.Fetch.Request(itemId: 123))
         
-        if Default.isSeries() {
-            fireSeries()
-        } else {
-            fireMovies()
-        }
+//        if Default.isSeries() {
+//            fireSeries()
+//        } else {
+//            fireMovies()
+//        }
+        
+        fireShows()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,21 +83,27 @@ class ListController: UIViewController, ListControllerInput {
         selectedItems = 0
     }
 
-    func resetRequest() {
-        hasPendingRequest = true
+    func resetList() {
+        page = 1
+        shows.removeAll()
+        collectionView.reloadData()
+        
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
     }
     
-    func fireMovies() {
-        resetRequest()
-        manager.fetchMoviesWithPage(page: page, onSuccess: { json in
-            self.extract(json)
-        }, onFailure: { error in
-            print(error)
-        })
-    }
+//    func fireMovies() {
+//        resetRequest()
+//        manager.fetchMoviesWithPage(page: page, onSuccess: { json in
+//            self.extract(json)
+//        }, onFailure: { error in
+//            print(error)
+//        })
+//    }
     
     func fireSearchMovie(withKeyword key: String) {
-        resetRequest()
+        hasPendingRequest = true
         manager.searchMoviesWithText(keyword: key, page: page, onSuccess: { json in
             self.extract(json)
         }, onFailure: { error in
@@ -107,19 +115,30 @@ class ListController: UIViewController, ListControllerInput {
         let results = json["results"].array
         for item in results! {
             let movie = MovieDetail(json: item)
-            self.movies.append(movie)
+            self.shows.append(movie)
         }
         self.page += 1
         self.collectionView.reloadData()
         self.hasPendingRequest = false
     }
 
-    func fireSeries() {
-        resetRequest()
-        manager.fetchSeriesWithPage(page: page, onSuccess: { json in
+//    func fireSeries() {
+//        resetRequest()
+//        manager.fetchSeriesWithPage(page: page, onSuccess: { json in
+//            self.extract(json)
+//        }, onFailure: { error in
+//            print(error)
+//        })
+//    }
+    
+    func fireShows() {
+        hasPendingRequest = true
+        manager.fetchShows(withPage: page, onSuccess: { json in
             self.extract(json)
         }, onFailure: { error in
-            print(error)
+            let alert = UIAlertController(title: "Ooopps!", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         })
     }
 }
@@ -127,22 +146,23 @@ class ListController: UIViewController, ListControllerInput {
 extension ListController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return shows.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listId", for: indexPath) as! ListCVCell
         
-        cell.photo.setImageFrom(url: movies[indexPath.row].poster_path!)
+        cell.photo.setImageFrom(url: shows[indexPath.row].poster_path!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row >= movies.count - 6 && hasPendingRequest == false {
+        if indexPath.row >= shows.count - 6 && hasPendingRequest == false {
             if searchBar.text == "" {
-                self.fireMovies()
+//                self.fireMovies()
+                self.fireShows()
             } else {
                 self.fireSearchMovie(withKeyword: searchBar.text!)
             }
@@ -157,7 +177,7 @@ extension ListController: UICollectionViewDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailsVC") as! DetailsController
-        vc.movie = movies[indexPath.row]
+        vc.movie = shows[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -194,18 +214,15 @@ extension ListController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         searchBar.text = nil
 
-        if searchBar.text != "" && movies.count == 0 {
-            movies.removeAll()
-            page = 1
-            fireMovies()
+        if searchBar.text != "" && shows.count == 0 {
+            resetList()
+//            fireMovies()
+            fireShows()
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        movies.removeAll()
-        collectionView.reloadData()
-        page = 1
-        searchBar.resignFirstResponder()
+        resetList()
         fireSearchMovie(withKeyword: searchBar.text!)
     }
 }
@@ -213,15 +230,13 @@ extension ListController: UISearchBarDelegate {
 extension ListController: FilterControllerDelegate {
     
     func didTappedSave(controller: FilterController) {
-        page = 1
-        movies.removeAll()
-        collectionView.reloadData()
-        
-        if Default.isSeries() {
-            fireSeries()
-        } else {
-            fireMovies()
-        }
+        resetList()
+        fireShows()
+//        if Default.isSeries() {
+//            fireSeries()
+//        } else {
+//            fireMovies()
+//        }
     }
 }
 

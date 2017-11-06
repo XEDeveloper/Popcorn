@@ -34,31 +34,6 @@ class APIManager {
         ["name": "Title (Z-A)", "value": "title.asc"]
     ]
     
-    // Movies
-    
-    func fetchMoviesWithPage(page: Int, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
-        
-        let url = baseURL + APIManager.getMoviesEndpoint + "?api_key=\(apiKey)&language=en-US&sort_by=\(sortBy())&include_adult=\(adult())&year=\(year())&include_video=\(false)&page=\(page)"
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
-            .responseJSON { response in
-                
-                if let status = response.response?.statusCode {
-                    switch(status) {
-                    case 200:
-                        if let result = response.result.value {
-                            onSuccess(JSON(result))
-                        }
-                    default:
-//                        if let result = response.result.value {
-//                            onFailure(JSON(result) as! Error)
-//                        }
-                        print("default")
-                    }
-                }
-        }
-    }
-    
     func searchMoviesWithText(keyword: String, page: Int, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         
         let url = baseURL + APIManager.getSearchEndpoint + "?api_key=\(apiKey)&query=\(keyword)&page=\(page)"
@@ -98,11 +73,12 @@ class APIManager {
         }
     }
     
-    // Series
-    
-    func fetchSeriesWithPage(page: Int, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+    func fetchShows(withPage page: Int, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         
-        let url = baseURL + APIManager.getSeriesEndpoint + "?api_key=\(apiKey)&language=en-US&sort_by=\(sortBy())&include_video=\(false)&page=\(page)&timezone=America%2FNew_York&include_null_first_air_dates=false"
+        var url = baseURL + (Default.isSeries() ? APIManager.getSeriesEndpoint : APIManager.getMoviesEndpoint) + "?api_key=\(apiKey)\(languageUS)&sort_by=\(sortBy())&include_video=\(false)&page=\(page)&"
+        
+        url = url + (Default.isSeries() ? "timezone=\("America%2FNew_York")&include_null_first_air_dates=\(false)" // series
+            : "include_adult=\(adult())&year=\(year())&") // movies
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
             .responseJSON { response in
@@ -114,12 +90,32 @@ class APIManager {
                             onSuccess(JSON(result))
                         }
                     default:
-                        print("series default")
+                        print("default fetchShows")
+                        print(response)
                     }
                 }
         }
     }
 
+    func getShowDetails(id: Int, details: String, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+        
+        let url = baseURL + (Default.isSeries() ? APIManager.getTvEndpoint : APIManager.getMovieEndpoint) + "/\(id)" + "?api_key=\(apiKey)\(languageUS)&append_to_response=\(details)"
+        print(url)
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
+                
+                if let status = response.response?.statusCode {
+                    switch(status) {
+                    case 200:
+                        if let result = response.result.value {
+                            onSuccess(JSON(result))
+                        }
+                    default:
+                        print("request failed")
+                    }
+                }
+        }
+    }
 }
 
 extension APIManager {
