@@ -60,6 +60,7 @@
 		302F289F1FB4248D000F517D /* VideosTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F289E1FB4248D000F517D /* VideosTVCell.swift */; };
 		302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A01FB424B1000F517D /* SeasonTVCell.swift */; };
 		302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A21FB424BE000F517D /* CastTVCell.swift */; };
+		302F28A51FB46DC8000F517D /* SimilarTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A41FB46DC8000F517D /* SimilarTVCell.swift */; };
 		309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309D69F31FAC4FD9000802E1 /* UserDefaults.swift */; };
 		30C367641F999AD000A242CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367631F999AD000A242CF /* Category.swift */; };
 		30C367671F99A2DC00A242CF /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */; };
@@ -150,6 +151,7 @@
 		302F289E1FB4248D000F517D /* VideosTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTVCell.swift; sourceTree = "<group>"; };
 		302F28A01FB424B1000F517D /* SeasonTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTVCell.swift; sourceTree = "<group>"; };
 		302F28A21FB424BE000F517D /* CastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTVCell.swift; sourceTree = "<group>"; };
+		302F28A41FB46DC8000F517D /* SimilarTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarTVCell.swift; sourceTree = "<group>"; };
 		309D69F31FAC4FD9000802E1 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		30C367631F999AD000A242CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				302F289E1FB4248D000F517D /* VideosTVCell.swift */,
 				302F28A01FB424B1000F517D /* SeasonTVCell.swift */,
 				302F28A21FB424BE000F517D /* CastTVCell.swift */,
+				302F28A41FB46DC8000F517D /* SimilarTVCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30F640241F9DE338005BC903 /* Info.plist in Sources */,
+				302F28A51FB46DC8000F517D /* SimilarTVCell.swift in Sources */,
 				3003DA3B1F989C5E00D42EDF /* ListPresenter.swift in Sources */,
 				3003DA351F989C4800D42EDF /* ListConfigurator.swift in Sources */,
 				3003DA091F989B1A00D42EDF /* SettingsController.swift in Sources */,

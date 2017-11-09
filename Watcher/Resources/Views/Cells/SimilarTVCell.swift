@@ -1,5 +1,5 @@
 //
-//  CastTVCell.swift
+//  SimilarTVCell.swift
 //  Watcher
 //
 //  Created by Rj on 09/11/2017.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CastTVCell: UITableViewCell {
+class SimilarTVCell: UITableViewCell {
 
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var characterNameLabel: UILabel!
-    @IBOutlet weak var realNameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var rateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -25,6 +25,7 @@ class DetailsController: UIViewController {
     let headerView = UIView()
     
     var menuSegmented: UISegmentedControl!
+    var menuTabs = ["Videos", "Seasons", "Casts", "Similar Shows"]
     var items: [NSDictionary] = []
     
     var movie: MovieDetail!
@@ -32,6 +33,7 @@ class DetailsController: UIViewController {
     var videos: [NSDictionary] = []
     var seasons: [NSDictionary] = []
     var casts: [NSDictionary] = []
+    var similars: [NSDictionary] = []
     
     // MARK: - View Life Cycle
     
@@ -71,7 +73,10 @@ class DetailsController: UIViewController {
         loader.startAnimating()
         tableView.tableFooterView = loader
         
-        menuSegmented = UISegmentedControl(items: ["Videos", "Seasons", "Cast"])
+        if !Default.isSeries() {
+            menuTabs.remove(at: 1)
+        }
+        menuSegmented = UISegmentedControl(items: menuTabs)
         menuSegmented.tintColor = .orange
         menuSegmented.selectedSegmentIndex = 0
         menuSegmented.addTarget(self, action: #selector(segmentedChanged), for: .valueChanged)
@@ -81,9 +86,6 @@ class DetailsController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.layer.zPosition = -2
         menuSegmented.addSubview(blurEffectView)
-        
-        tableView.tableHeaderView = movideDetailsView
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,10 +121,8 @@ class DetailsController: UIViewController {
     }
     
     func details() -> String {
-        var detailsString = "videos"
-        detailsString = detailsString + ",seasons"
-        
-        return detailsString
+        let detailsString = "videos,credits,similar"
+        return Default.isSeries() ? detailsString + ",seasons" : detailsString
     }
     
     func fireShowDetails() {
@@ -130,7 +130,7 @@ class DetailsController: UIViewController {
         if let movieID = movie.id {
             let manager = APIManager()
             manager.getShowDetails(id: movieID, details: details(), onSuccess: { json in
-//                print(json)
+//                print(json["similar"])
                 let results = json["videos"]["results"].array
                 for item in results! {
                     self.videos.append(["title": item["name"].stringValue, "link": item["key"].stringValue])
@@ -142,6 +142,16 @@ class DetailsController: UIViewController {
                         self.genresLabel.text = self.genresLabel.text! + ", "
                     }
                     self.genresLabel.text = self.genresLabel.text! + genre["name"].string!
+                }
+                
+                let casts = json["credits"]["cast"].array
+                for item in casts! {
+                    self.casts.append(["character": item["character"].stringValue, "actor": item["name"].stringValue, "profile_path": item["profile_path"].stringValue])
+                }
+                
+                let similars = json["similar"]["results"].array
+                for item in similars! {
+                    self.similars.append(["name": item["name"].stringValue, "overview": item["overview"].stringValue, "backdrop_path": item["backdrop_path"].stringValue, "poster_path": item["poster_path"].stringValue, "vote": item["vote_average"].stringValue])
                 }
                 
                 if Default.isSeries() {
@@ -157,6 +167,7 @@ class DetailsController: UIViewController {
                     }
                 }
                 
+                self.tableView.tableHeaderView = self.movideDetailsView
                 self.tableView.tableFooterView = UIView()//self.menuSegmented
                 self.tableView.reloadData()
                 
@@ -177,21 +188,33 @@ class DetailsController: UIViewController {
         present(root, animated: true, completion: nil)
     }
     
+    func gotoSeason(withIndex index: Int) {
+        
+    }
+    
+    func viewActor(withIndex index: Int) {
+        
+    }
+    
+    func gotoShow(withIndex index: Int) {
+        
+    }
+    
 }
 
 extension DetailsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if menuSegmented != nil {
-            switch menuSegmented.selectedSegmentIndex {
-            case 0:
+            switch menuTabs[menuSegmented.selectedSegmentIndex] {
+            case "Videos":
                 return videos.count
-            case 1:
+            case "Seasons":
                 return seasons.count
-            case 2:
+            case "Casts":
                 return casts.count
             default:
-                return 0
+                return similars.count
             }
         }
         
@@ -199,17 +222,17 @@ extension DetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
+//        let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
         
-        if menuSegmented.selectedSegmentIndex == 0 {
+        if menuTabs[menuSegmented.selectedSegmentIndex] == "Videos" {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideosTVCell", for: indexPath) as! VideosTVCell
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             cell.nameLabel.text = (videos[indexPath.row]["title"] as! String)
-            
             return cell
-        } else if menuSegmented.selectedSegmentIndex == 1 {
+            
+        } else if menuTabs[menuSegmented.selectedSegmentIndex] == "Seasons" {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeasonTVCell", for: indexPath) as! SeasonTVCell
             cell.backgroundColor = .clear
@@ -221,18 +244,40 @@ extension DetailsController: UITableViewDataSource {
             cell.seasonLabel.text = "Season " + String(season["season"] as! Int)
             cell.episodeLabel.text = "Number of Episodes: " + String(season["episode"] as! Int)
             cell.dateLabel.text = "Air Date: " + (season["air_date"] as! String)
+            
             return cell
             
-        } else if menuSegmented.selectedSegmentIndex == 2 {
+        } else if menuTabs[menuSegmented.selectedSegmentIndex] == "Casts" {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "CastTVCell", for: indexPath) as! CastTVCell
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
+            let cast = casts[indexPath.row]
+            var poster = (cast["profile_path"] as! String)
+            poster.remove(at: poster.startIndex)
+            cell.photoImageView.setImageFrom(url: "/" + poster, with: true)
+            cell.realNameLabel.text = (cast["actor"] as! String)
+            cell.characterNameLabel.text = (cast["character"] as! String)
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SimilarTVCell", for: indexPath) as! SimilarTVCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            let similar = similars[indexPath.row]
+            var poster = (similar["poster_path"] as! String)
+            poster.remove(at: poster.startIndex)
+            cell.photoImageView.setImageFrom(url: "/" + poster, with: true)
+            cell.titleLabel.text = (similar["name"] as! String)
+            cell.overviewLabel.text = (similar["overview"] as! String)
+            cell.rateLabel.text = (similar["vote"] as! String)
             
             return cell
         }
         
-        return cell
+//        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -241,15 +286,15 @@ extension DetailsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if menuSegmented != nil {
-            switch menuSegmented.selectedSegmentIndex {
-            case 0:
+            switch menuTabs[menuSegmented.selectedSegmentIndex] {
+            case "Videos":
                 return 44.0
-            case 1:
+            case "Seasons":
                 return 111.0
-            case 2:
-                return 44.0
+            case "Casts":
+                return 111.0
             default:
-                return 0
+                return 111.0
             }
         }
         
@@ -261,7 +306,23 @@ extension DetailsController: UITableViewDataSource {
 extension DetailsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        playVideo(withIndex: indexPath.row)
+        
+        if menuSegmented != nil {
+            switch menuTabs[menuSegmented.selectedSegmentIndex] {
+            case "Videos":
+                playVideo(withIndex: indexPath.row)
+                break
+            case "Seasons":
+                gotoSeason(withIndex: indexPath.row)
+                break
+            case "Casts":
+                viewActor(withIndex: indexPath.row)
+                break
+            default:
+                gotoShow(withIndex: indexPath.row)
+                break
+            }
+        }
     }
     
 }
