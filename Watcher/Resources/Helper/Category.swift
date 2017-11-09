@@ -22,11 +22,11 @@ extension UIImageView {
     func setImageFrom(url: String, with indicator: Bool = false) {
         
         self.kf.indicatorType = .activity
-        if url.range(of: "tmdb") == nil {
+//        if url.range(of: "tmdb") == nil {
             self.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + url))
-        } else {
-            self.kf.setImage(with: URL(string: url))
-        }
+//        } else {
+//            self.kf.setImage(with: URL(string: url))
+//        }
     }
     
 }

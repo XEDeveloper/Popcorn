@@ -57,6 +57,9 @@
 		3007E94A1F9D819900E2218C /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E9491F9D819900E2218C /* DetailsRouter.swift */; };
 		3007E94C1F9D81A200E2218C /* DetailsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E94B1F9D81A200E2218C /* DetailsConfiguration.swift */; };
 		3007E94E1F9D81AE00E2218C /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E94D1F9D81AE00E2218C /* DetailsController.swift */; };
+		302F289F1FB4248D000F517D /* VideosTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F289E1FB4248D000F517D /* VideosTVCell.swift */; };
+		302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A01FB424B1000F517D /* SeasonTVCell.swift */; };
+		302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A21FB424BE000F517D /* CastTVCell.swift */; };
 		309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309D69F31FAC4FD9000802E1 /* UserDefaults.swift */; };
 		30C367641F999AD000A242CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367631F999AD000A242CF /* Category.swift */; };
 		30C367671F99A2DC00A242CF /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */; };
@@ -144,6 +147,9 @@
 		3007E9491F9D819900E2218C /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		3007E94B1F9D81A200E2218C /* DetailsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsConfiguration.swift; sourceTree = "<group>"; };
 		3007E94D1F9D81AE00E2218C /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
+		302F289E1FB4248D000F517D /* VideosTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTVCell.swift; sourceTree = "<group>"; };
+		302F28A01FB424B1000F517D /* SeasonTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTVCell.swift; sourceTree = "<group>"; };
+		302F28A21FB424BE000F517D /* CastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTVCell.swift; sourceTree = "<group>"; };
 		309D69F31FAC4FD9000802E1 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		30C367631F999AD000A242CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
@@ -359,6 +365,9 @@
 			isa = PBXGroup;
 			children = (
 				3003DA421F98A04700D42EDF /* ListCVCell.swift */,
+				302F289E1FB4248D000F517D /* VideosTVCell.swift */,
+				302F28A01FB424B1000F517D /* SeasonTVCell.swift */,
+				302F28A21FB424BE000F517D /* CastTVCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -745,6 +754,7 @@
 				3003DA351F989C4800D42EDF /* ListConfigurator.swift in Sources */,
 				3003DA091F989B1A00D42EDF /* SettingsController.swift in Sources */,
 				309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */,
+				302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */,
 				3003DA311F989C2500D42EDF /* ProfileWorker.swift in Sources */,
 				3003DA151F989B5900D42EDF /* SettingsRouter.swift in Sources */,
 				3003DA331F989C2D00D42EDF /* ProfileRouter.swift in Sources */,
@@ -784,6 +794,8 @@
 				3003DA131F989B5100D42EDF /* SettingsWorker.swift in Sources */,
 				3003DA211F989BB200D42EDF /* HomeWorker.swift in Sources */,
 				3007E9481F9D819300E2218C /* DetailsWorker.swift in Sources */,
+				302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */,
+				302F289F1FB4248D000F517D /* VideosTVCell.swift in Sources */,
 				3003DA431F98A04700D42EDF /* ListCVCell.swift in Sources */,
 				30C367641F999AD000A242CF /* Category.swift in Sources */,
 				30F6401E1F9DA939005BC903 /* APIManager.swift in Sources */,
