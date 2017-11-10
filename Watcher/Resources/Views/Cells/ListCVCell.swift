@@ -11,4 +11,6 @@ import UIKit
 class ListCVCell: UICollectionViewCell {
     
     @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var checkBgView: UIView!
+    @IBOutlet weak var checkImageView: UIImageView!
 }

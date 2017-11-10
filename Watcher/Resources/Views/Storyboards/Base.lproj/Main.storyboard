@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3A0-7F-ULB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3A0-7F-ULB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,20 +36,37 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="375"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rle-1y-gyF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sampe-poster" translatesAutoresizingMaskIntoConstraints="NO" id="Rle-1y-gyF">
                                                     <rect key="frame" x="0.0" y="0.0" width="250" height="375"/>
+                                                </imageView>
+                                                <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCJ-bF-gqV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="375"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="v65-kc-DBe">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="250" height="375"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Rle-1y-gyF" firstAttribute="top" secondItem="Khd-O3-2wT" secondAttribute="top" id="6oX-ep-tyU"/>
+                                            <constraint firstAttribute="trailing" secondItem="v65-kc-DBe" secondAttribute="trailing" constant="0.5" id="8P3-EX-K6d"/>
+                                            <constraint firstAttribute="bottom" secondItem="v65-kc-DBe" secondAttribute="bottom" id="C1Q-nb-RPP"/>
+                                            <constraint firstItem="fCJ-bF-gqV" firstAttribute="leading" secondItem="Khd-O3-2wT" secondAttribute="leading" id="CaB-h3-euB"/>
                                             <constraint firstItem="Rle-1y-gyF" firstAttribute="leading" secondItem="Khd-O3-2wT" secondAttribute="leading" id="ETm-gj-D4i"/>
                                             <constraint firstAttribute="trailing" secondItem="Rle-1y-gyF" secondAttribute="trailing" id="Fw2-UJ-BtV"/>
+                                            <constraint firstItem="v65-kc-DBe" firstAttribute="top" secondItem="Khd-O3-2wT" secondAttribute="top" id="GF3-IZ-dl0"/>
+                                            <constraint firstAttribute="bottom" secondItem="fCJ-bF-gqV" secondAttribute="bottom" id="Scb-nE-os5"/>
+                                            <constraint firstItem="fCJ-bF-gqV" firstAttribute="top" secondItem="Khd-O3-2wT" secondAttribute="top" id="TBg-cn-FYf"/>
                                             <constraint firstAttribute="bottom" secondItem="Rle-1y-gyF" secondAttribute="bottom" id="ekm-yz-nJW"/>
+                                            <constraint firstItem="v65-kc-DBe" firstAttribute="leading" secondItem="Khd-O3-2wT" secondAttribute="leading" constant="-0.5" id="jRs-GE-QTF"/>
+                                            <constraint firstAttribute="trailing" secondItem="fCJ-bF-gqV" secondAttribute="trailing" id="kgm-aC-SZX"/>
                                         </constraints>
                                         <size key="customSize" width="250" height="375"/>
                                         <connections>
+                                            <outlet property="checkBgView" destination="fCJ-bF-gqV" id="uHR-1d-p5k"/>
+                                            <outlet property="checkImageView" destination="v65-kc-DBe" id="ran-AA-TnD"/>
                                             <outlet property="photo" destination="Rle-1y-gyF" id="aFs-5n-CNu"/>
                                         </connections>
                                     </collectionViewCell>
@@ -523,6 +540,7 @@ asd</string>
     <resources>
         <image name="back" width="512" height="512"/>
         <image name="calendar" width="225" height="225"/>
+        <image name="check" width="338" height="335"/>
         <image name="film" width="386" height="386"/>
         <image name="play-button" width="32" height="32"/>
         <image name="rate" width="256" height="256"/>

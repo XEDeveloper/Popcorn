@@ -28,7 +28,7 @@ class ListController: UIViewController, ListControllerInput {
     var page = 1
     var hasPendingRequest = false
     
-    var selectedItems = 0
+    var selectedItems: [MovieDetail] = []
     var shows: [MovieDetail] = []
     
     //
@@ -45,25 +45,19 @@ class ListController: UIViewController, ListControllerInput {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(tappedFilter))
-        navigationController?.navigationBar.tintColor = .orange
         
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Type title here..."
-        searchBar.barStyle = .blackTranslucent
-        searchBar.delegate = self
-        searchBar.keyboardAppearance = .dark
-        navigationItem.titleView = searchBar
+        normalNavigationBar()
+        navigationController?.navigationBar.tintColor = .orange
+        initSearchBar()
         
 //        output.fetchItems(request: ListModel.Fetch.Request(itemId: 123))
-        
-//        if Default.isSeries() {
-//            fireSeries()
-//        } else {
-//            fireMovies()
-//        }
-        
+
         fireShows()
+        
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delaysTouchesBegan = true
+        collectionView.addGestureRecognizer(longPress)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +65,39 @@ class ListController: UIViewController, ListControllerInput {
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .compact)
     }
 
+    
+    func initSearchBar() {
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Type title here..."
+        searchBar.barStyle = .blackTranslucent
+        searchBar.delegate = self
+        searchBar.keyboardAppearance = .dark
+    }
+    
+    func normalNavigationBar() {
+        selectedItems.removeAll()
+        collectionView.reloadData()
+        title = nil
+        navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(tappedFilter))
+        navigationItem.rightBarButtonItem = nil
+    }
+    
+    func selectingNavigationBar() {
+        navigationItem.titleView = nil
+        title = "Selected Item (1)"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelSelection))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSelection))
+    }
+    
+    @objc func cancelSelection() {
+        normalNavigationBar()
+    }
+    
+    @objc func saveSelection() {
+        normalNavigationBar()
+    }
+    
     @objc func tappedFilter() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -78,11 +105,22 @@ class ListController: UIViewController, ListControllerInput {
         vc.delegate = self
         present(vc, animated: false, completion: nil)
     }
-    
-    func tappedClear() {
-        selectedItems = 0
-    }
 
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        selectingNavigationBar()
+        let p = gesture.location(in: collectionView)
+        
+        if let indexPath = collectionView.indexPathForItem(at: p) {
+            // get the cell at indexPath (the one you long pressed)
+            let cell = collectionView.cellForItem(at: indexPath) as! ListCVCell
+            cell.checkBgView.isHidden = false
+            cell.checkImageView.isHidden = false
+            selectedItems.append(shows[indexPath.row])
+        } else {
+            print("couldn't find index path")
+        }
+    }
+    
     func resetList() {
         page = 1
         shows.removeAll()
@@ -93,54 +131,40 @@ class ListController: UIViewController, ListControllerInput {
         }
     }
     
-//    func fireMovies() {
-//        resetRequest()
-//        manager.fetchMoviesWithPage(page: page, onSuccess: { json in
-//            self.extract(json)
-//        }, onFailure: { error in
-//            print(error)
-//        })
-//    }
-    
     func fireSearchMovie(withKeyword key: String) {
         hasPendingRequest = true
         manager.searchMoviesWithText(keyword: key, page: page, onSuccess: { json in
-            self.extract(json)
+            let results = json["results"].array
+            for item in results! {
+                let movie = MovieDetail(json: item)
+                self.shows.append(movie)
+            }
+            self.page += 1
+            self.collectionView.reloadData()
+            self.hasPendingRequest = false
         }, onFailure: { error in
             print(error)
         })
     }
     
-    func extract(_ json: JSON) {
-        let results = json["results"].array
-        for item in results! {
-            let movie = MovieDetail(json: item)
-            self.shows.append(movie)
-        }
-        self.page += 1
-        self.collectionView.reloadData()
-        self.hasPendingRequest = false
-    }
-
-//    func fireSeries() {
-//        resetRequest()
-//        manager.fetchSeriesWithPage(page: page, onSuccess: { json in
-//            self.extract(json)
-//        }, onFailure: { error in
-//            print(error)
-//        })
-//    }
-    
     func fireShows() {
         hasPendingRequest = true
         manager.fetchShows(withPage: page, onSuccess: { json in
-            self.extract(json)
+            let results = json["results"].array
+            for item in results! {
+                let movie = MovieDetail(json: item)
+                self.shows.append(movie)
+            }
+            self.page += 1
+            self.collectionView.reloadData()
+            self.hasPendingRequest = false
         }, onFailure: { error in
             let alert = UIAlertController(title: "Ooopps!", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         })
     }
+
 }
 
 extension ListController: UICollectionViewDataSource {
@@ -154,6 +178,14 @@ extension ListController: UICollectionViewDataSource {
         
         cell.photo.setImageFrom(url: shows[indexPath.row].poster_path!)
         
+        if shows.contains(where: { $0.id == shows[indexPath.row].id } ) {
+            cell.checkBgView.isHidden = true
+            cell.checkImageView.isHidden = true
+        } else {
+            cell.checkBgView.isHidden = false
+            cell.checkImageView.isHidden = false
+        }
+        
         return cell
     }
     
@@ -161,7 +193,6 @@ extension ListController: UICollectionViewDataSource {
         
         if indexPath.row >= shows.count - 6 && hasPendingRequest == false {
             if searchBar.text == "" {
-//                self.fireMovies()
                 self.fireShows()
             } else {
                 self.fireSearchMovie(withKeyword: searchBar.text!)
@@ -173,12 +204,35 @@ extension ListController: UICollectionViewDataSource {
 extension ListController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedItems += 1
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "detailsVC") as! DetailsController
-        vc.movie = shows[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        if title == nil { // browsing
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "detailsVC") as! DetailsController
+            vc.movie = shows[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else { // selecting
+            
+            if selectedItems.count > 1 {
+                if selectedItems[0].id == selectedItems[1].id {
+                    selectedItems.removeFirst()
+                }
+            }
+            
+            let cell = collectionView.cellForItem(at: indexPath) as! ListCVCell
+            if cell.checkBgView.isHidden {
+                cell.checkBgView.isHidden = false
+                cell.checkImageView.isHidden = false
+                selectedItems.append(shows[indexPath.row])
+            } else {
+                selectedItems = selectedItems.filter( { $0.id != shows[indexPath.row].id! } )
+                cell.checkBgView.isHidden = true
+                cell.checkImageView.isHidden = true
+            }
+            
+            self.title = selectedItems.count == 0 ? "Select Shows" : "Selected Items (\(selectedItems.count))"
+        }
     }
 }
 

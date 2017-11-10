@@ -43,7 +43,7 @@ class DetailsController: UIViewController {
         // Do any additional setup after loading the view.
         
         if movie != nil {
-            print(movie.id!)
+//            print(movie.id!)
             backdropPhoto.setImageFrom(url: moviePhoto(isCover: true))
             backgroundImageView.setImageFrom(url: moviePhoto(isCover: false))
             titleLabel.text = movie.title
@@ -86,6 +86,7 @@ class DetailsController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.layer.zPosition = -2
         menuSegmented.addSubview(blurEffectView)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
