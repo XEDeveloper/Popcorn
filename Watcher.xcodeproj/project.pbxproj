@@ -69,6 +69,7 @@
 		30F6401E1F9DA939005BC903 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F6401D1F9DA939005BC903 /* APIManager.swift */; };
 		30F640211F9DB6CD005BC903 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F640201F9DB6CD005BC903 /* MovieDetail.swift */; };
 		30F640241F9DE338005BC903 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 3003D9D51F989A0000D42EDF /* Info.plist */; };
+		30F866131FB5A73100F2D665 /* RecordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F866121FB5A73100F2D665 /* RecordsController.swift */; };
 		79CFE65CA3627E02E32E5504 /* Pods_Watcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D439C05A6DC4610A547868 /* Pods_Watcher.framework */; };
 		C13FF587CEE023103A0C48AB /* Pods_WatcherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE1565806A6EAE7657AEF8A /* Pods_WatcherTests.framework */; };
 /* End PBXBuildFile section */
@@ -159,6 +160,7 @@
 		30DE65931F9F628E000F6D51 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		30F6401D1F9DA939005BC903 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		30F640201F9DB6CD005BC903 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		30F866121FB5A73100F2D665 /* RecordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsController.swift; sourceTree = "<group>"; };
 		793F905D67C39203B3BB01B3 /* Pods_WatcherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatcherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		903F86DA60B614FE6EB3D637 /* Pods-WatcherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcherUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatcherUITests/Pods-WatcherUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D439C05A6DC4610A547868 /* Pods_Watcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +281,7 @@
 				3003D9F01F989A6300D42EDF /* List */,
 				3003D9EF1F989A5A00D42EDF /* Settings */,
 				30D01C3E1FA71B490001B9F1 /* WebViewController.swift */,
+				30F866121FB5A73100F2D665 /* RecordsController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				30F6401E1F9DA939005BC903 /* APIManager.swift in Sources */,
 				30D01C3F1FA71B490001B9F1 /* WebViewController.swift in Sources */,
 				3003DA371F989C5100D42EDF /* ListInteractor.swift in Sources */,
+				30F866131FB5A73100F2D665 /* RecordsController.swift in Sources */,
 				3003DA2B1F989C0B00D42EDF /* ProfileInteractor.swift in Sources */,
 				3007E94A1F9D819900E2218C /* DetailsRouter.swift in Sources */,
 				3003DA251F989BE700D42EDF /* LoginConfigurator.swift in Sources */,

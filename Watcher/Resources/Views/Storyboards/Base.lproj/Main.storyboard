@@ -76,6 +76,20 @@
                                     <outlet property="delegate" destination="tBa-Fs-4hf" id="zkL-zE-vFl"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZTk-lP-j6M">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watched Shows" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6k-zm-38B">
+                                        <rect key="frame" x="83" y="14" width="208" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="Fa3-RC-SXz"/>
@@ -85,11 +99,46 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="aNi-wM-K4t" id="VoT-i6-2gs"/>
+                        <outlet property="watchedShowsView" destination="ZTk-lP-j6M" id="U0e-Wg-6Uz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ns-IV-yGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1824.8" y="31.934032983508249"/>
+        </scene>
+        <!--Records Controller-->
+        <scene sceneID="f7s-Z1-AY8">
+            <objects>
+                <viewController storyboardIdentifier="RecordsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pUA-HX-yoJ" customClass="RecordsController" customModule="Watcher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CQD-Tq-nu4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i9R-2e-sUB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="pUA-HX-yoJ" id="Dks-Xe-0Je"/>
+                                    <outlet property="delegate" destination="pUA-HX-yoJ" id="ZF1-RX-Aae"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i9R-2e-sUB" firstAttribute="leading" secondItem="Gyx-u0-1NQ" secondAttribute="leading" id="D6q-tE-AS0"/>
+                            <constraint firstItem="i9R-2e-sUB" firstAttribute="top" secondItem="CQD-Tq-nu4" secondAttribute="top" id="HEF-hS-lTB"/>
+                            <constraint firstItem="i9R-2e-sUB" firstAttribute="bottom" secondItem="Gyx-u0-1NQ" secondAttribute="bottom" id="ICQ-rN-Hfg"/>
+                            <constraint firstItem="i9R-2e-sUB" firstAttribute="trailing" secondItem="Gyx-u0-1NQ" secondAttribute="trailing" id="Lcb-Uz-grp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Gyx-u0-1NQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="i9R-2e-sUB" id="0K6-2d-eD2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVY-G9-HPQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="785.75712143928047"/>
         </scene>
         <!--Details Controller-->
         <scene sceneID="1RE-Kb-qbo">

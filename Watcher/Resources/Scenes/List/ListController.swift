@@ -21,6 +21,7 @@ protocol ListControllerOutput {
 class ListController: UIViewController, ListControllerInput {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var watchedShowsView: UIView!
     
     let searchBar = UISearchBar()
     let manager = APIManager()
@@ -35,6 +36,8 @@ class ListController: UIViewController, ListControllerInput {
     var output: ListControllerOutput!
     var router: ListRouter!
     //
+    
+    var lastContentOffset: CGFloat = 0.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,6 +61,8 @@ class ListController: UIViewController, ListControllerInput {
         longPress.minimumPressDuration = 0.5
         longPress.delaysTouchesBegan = true
         collectionView.addGestureRecognizer(longPress)
+        
+        watchedShowsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showWatchedShows)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,12 +95,29 @@ class ListController: UIViewController, ListControllerInput {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSelection))
     }
     
+    @objc func showWatchedShows() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "RecordsController") as! RecordsController
+        let root = UINavigationController(rootViewController: vc)
+        present(root, animated: true, completion: nil)
+    }
+    
     @objc func cancelSelection() {
         normalNavigationBar()
     }
     
     @objc func saveSelection() {
-        normalNavigationBar()
+        let alert = UIAlertController(title: "Name Please!", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+            self.normalNavigationBar()
+            let field = alert.textFields![0] as UITextField
+            print(field.text!)
+        }))
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Your name here obviously 🙄"
+        }
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func tappedFilter() {
@@ -255,6 +277,27 @@ extension ListController: UICollectionViewDelegateFlowLayout {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5.0
     }
+}
+
+extension ListController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if self.lastContentOffset > scrollView.contentOffset.y {
+            // uping
+            UIView.animate(withDuration: 0.3, animations: {
+                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+            })
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
+            // downing
+            UIView.animate(withDuration: 0.3, animations: {
+                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 48.0)
+            })
+        }
+        
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+    
 }
 
 extension ListController: UISearchBarDelegate {
