@@ -61,6 +61,7 @@
 		302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A01FB424B1000F517D /* SeasonTVCell.swift */; };
 		302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A21FB424BE000F517D /* CastTVCell.swift */; };
 		302F28A51FB46DC8000F517D /* SimilarTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A41FB46DC8000F517D /* SimilarTVCell.swift */; };
+		304848F91FC2D541007BBCC1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304848F81FC2D541007BBCC1 /* DataManager.swift */; };
 		309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309D69F31FAC4FD9000802E1 /* UserDefaults.swift */; };
 		30C367641F999AD000A242CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367631F999AD000A242CF /* Category.swift */; };
 		30C367671F99A2DC00A242CF /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */; };
@@ -70,6 +71,7 @@
 		30F640211F9DB6CD005BC903 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F640201F9DB6CD005BC903 /* MovieDetail.swift */; };
 		30F640241F9DE338005BC903 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 3003D9D51F989A0000D42EDF /* Info.plist */; };
 		30F866131FB5A73100F2D665 /* RecordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F866121FB5A73100F2D665 /* RecordsController.swift */; };
+		30F866161FB5AD0E00F2D665 /* Record.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30F866141FB5AD0E00F2D665 /* Record.xcdatamodeld */; };
 		79CFE65CA3627E02E32E5504 /* Pods_Watcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D439C05A6DC4610A547868 /* Pods_Watcher.framework */; };
 		C13FF587CEE023103A0C48AB /* Pods_WatcherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE1565806A6EAE7657AEF8A /* Pods_WatcherTests.framework */; };
 /* End PBXBuildFile section */
@@ -153,6 +155,7 @@
 		302F28A01FB424B1000F517D /* SeasonTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTVCell.swift; sourceTree = "<group>"; };
 		302F28A21FB424BE000F517D /* CastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTVCell.swift; sourceTree = "<group>"; };
 		302F28A41FB46DC8000F517D /* SimilarTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarTVCell.swift; sourceTree = "<group>"; };
+		304848F81FC2D541007BBCC1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		309D69F31FAC4FD9000802E1 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		30C367631F999AD000A242CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		30F6401D1F9DA939005BC903 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		30F640201F9DB6CD005BC903 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		30F866121FB5A73100F2D665 /* RecordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsController.swift; sourceTree = "<group>"; };
+		30F866151FB5AD0E00F2D665 /* Record.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Record.xcdatamodel; sourceTree = "<group>"; };
 		793F905D67C39203B3BB01B3 /* Pods_WatcherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatcherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		903F86DA60B614FE6EB3D637 /* Pods-WatcherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcherUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatcherUITests/Pods-WatcherUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D439C05A6DC4610A547868 /* Pods_Watcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +215,7 @@
 		3003D9B21F989A0000D42EDF = {
 			isa = PBXGroup;
 			children = (
+				30F866141FB5AD0E00F2D665 /* Record.xcdatamodeld */,
 				3003D9BD1F989A0000D42EDF /* Watcher */,
 				3003D9CA1F989A0000D42EDF /* Info.plist */,
 				3003D9D21F989A0000D42EDF /* WatcherTests */,
@@ -415,6 +420,7 @@
 				30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */,
 				30F6401D1F9DA939005BC903 /* APIManager.swift */,
 				309D69F31FAC4FD9000802E1 /* UserDefaults.swift */,
+				304848F81FC2D541007BBCC1 /* DataManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -775,6 +781,7 @@
 				3003DA1B1F989B9C00D42EDF /* HomeInteractor.swift in Sources */,
 				30DE65941F9F628E000F6D51 /* FilterController.swift in Sources */,
 				3003DA0D1F989B3B00D42EDF /* SettingsModel.swift in Sources */,
+				304848F91FC2D541007BBCC1 /* DataManager.swift in Sources */,
 				30F640211F9DB6CD005BC903 /* MovieDetail.swift in Sources */,
 				3003DA011F989AF600D42EDF /* LoginController.swift in Sources */,
 				3003D9FB1F989ABD00D42EDF /* LoginInteractor.swift in Sources */,
@@ -807,6 +814,7 @@
 				30C367641F999AD000A242CF /* Category.swift in Sources */,
 				30F6401E1F9DA939005BC903 /* APIManager.swift in Sources */,
 				30D01C3F1FA71B490001B9F1 /* WebViewController.swift in Sources */,
+				30F866161FB5AD0E00F2D665 /* Record.xcdatamodeld in Sources */,
 				3003DA371F989C5100D42EDF /* ListInteractor.swift in Sources */,
 				30F866131FB5A73100F2D665 /* RecordsController.swift in Sources */,
 				3003DA2B1F989C0B00D42EDF /* ProfileInteractor.swift in Sources */,
@@ -1113,6 +1121,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		30F866141FB5AD0E00F2D665 /* Record.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				30F866151FB5AD0E00F2D665 /* Record.xcdatamodel */,
+			);
+			currentVersion = 30F866151FB5AD0E00F2D665 /* Record.xcdatamodel */;
+			path = Record.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3003D9B31F989A0000D42EDF /* Project object */;
 }

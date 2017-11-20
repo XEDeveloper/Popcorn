@@ -14,6 +14,8 @@ class Default: NSObject {
     static let yearKey = "yearKey"
     static let adultKey = "adultKey"
     static let sortKey = "sortKey"
+    static let recordKey = "recordKey"
+    static let nameKey = "nameKey"
     
     // Filter
     
@@ -68,4 +70,6 @@ class Default: NSObject {
 //    class func setGenres(_ value: [String]) {
 //
 //    }
+    
+    
 }

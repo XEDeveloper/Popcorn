@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreData
 
 struct MovieDetail {
     
@@ -52,6 +53,20 @@ struct MovieDetail {
         if release_date == "" {
             release_date = json["first_air_date"].stringValue
         }
+        isError = false
+        message = "success"
+    }
+    
+    init(data: NSManagedObject) {
+        id = data.value(forKey: "id") as? Int
+        title = data.value(forKey: "title") as? String
+        poster_path = data.value(forKey: "poster_path") as? String
+        backdrop_path = data.value(forKey: "backdrop_path") as? String
+        overview = data.value(forKey: "overview") as? String
+        vote_average = data.value(forKey: "vote_average") as? Double
+        vote_count = data.value(forKey: "vote_count") as? Int
+        release_date = data.value(forKey: "release_date") as? String
+
         isError = false
         message = "success"
     }

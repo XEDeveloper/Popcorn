@@ -90,7 +90,7 @@ class ListController: UIViewController, ListControllerInput {
     
     func selectingNavigationBar() {
         navigationItem.titleView = nil
-        title = "Selected Item (1)"
+        title = "Selected Item (\(DataManager.fetchData().count))"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelSelection))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSelection))
     }
@@ -104,6 +104,7 @@ class ListController: UIViewController, ListControllerInput {
     
     @objc func cancelSelection() {
         normalNavigationBar()
+        collectionView.reloadData()
     }
     
     @objc func saveSelection() {
@@ -111,8 +112,8 @@ class ListController: UIViewController, ListControllerInput {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             self.normalNavigationBar()
-            let field = alert.textFields![0] as UITextField
-            print(field.text!)
+//            let field = alert.textFields![0] as UITextField
+//            Default.addRecord(show: selectedItems)
         }))
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Your name here obviously 🙄"
@@ -137,7 +138,10 @@ class ListController: UIViewController, ListControllerInput {
             let cell = collectionView.cellForItem(at: indexPath) as! ListCVCell
             cell.checkBgView.isHidden = false
             cell.checkImageView.isHidden = false
-            selectedItems.append(shows[indexPath.row])
+            if !DataManager.movieAlreadyExist(withID: shows[indexPath.row].id!) {
+                DataManager.add(movie: shows[indexPath.row])
+            }
+            collectionView.reloadData()
         } else {
             print("couldn't find index path")
         }
@@ -200,12 +204,14 @@ extension ListController: UICollectionViewDataSource {
         
         cell.photo.setImageFrom(url: shows[indexPath.row].poster_path!)
         
-        if shows.contains(where: { $0.id == shows[indexPath.row].id } ) {
-            cell.checkBgView.isHidden = true
-            cell.checkImageView.isHidden = true
-        } else {
-            cell.checkBgView.isHidden = false
-            cell.checkImageView.isHidden = false
+        if navigationItem.titleView == nil {
+            if DataManager.movieAlreadyExist(withID: shows[indexPath.row].id!) {
+                cell.checkBgView.isHidden = false
+                cell.checkImageView.isHidden = false
+            } else {
+                cell.checkBgView.isHidden = true
+                cell.checkImageView.isHidden = true
+            }
         }
         
         return cell
@@ -236,24 +242,34 @@ extension ListController: UICollectionViewDelegate {
             
         } else { // selecting
             
-            if selectedItems.count > 1 {
-                if selectedItems[0].id == selectedItems[1].id {
-                    selectedItems.removeFirst()
-                }
-            }
+//            if selectedItems.count > 1 {
+//                if selectedItems[0].id == selectedItems[1].id {
+//                    selectedItems.removeFirst()
+//                }
+//            }
+//
+//            let cell = collectionView.cellForItem(at: indexPath) as! ListCVCell
+//            if cell.checkBgView.isHidden {
+//                cell.checkBgView.isHidden = false
+//                cell.checkImageView.isHidden = false
+//                selectedItems.append(shows[indexPath.row])
+//            } else {
+//                selectedItems = selectedItems.filter( { $0.id != shows[indexPath.row].id! } )
+//                cell.checkBgView.isHidden = true
+//                cell.checkImageView.isHidden = true
+//            }
+//
+//            self.title = selectedItems.count == 0 ? "Select Shows" : "Selected Items (\(selectedItems.count))"
             
-            let cell = collectionView.cellForItem(at: indexPath) as! ListCVCell
-            if cell.checkBgView.isHidden {
-                cell.checkBgView.isHidden = false
-                cell.checkImageView.isHidden = false
-                selectedItems.append(shows[indexPath.row])
+            
+            if DataManager.movieAlreadyExist(withID: shows[indexPath.row].id!) {
+                DataManager.deleteMovie(withId: shows[indexPath.row].id!)
             } else {
-                selectedItems = selectedItems.filter( { $0.id != shows[indexPath.row].id! } )
-                cell.checkBgView.isHidden = true
-                cell.checkImageView.isHidden = true
+                DataManager.add(movie: shows[indexPath.row])
             }
+            title = "Selected Item (\(DataManager.fetchData().count))"
             
-            self.title = selectedItems.count == 0 ? "Select Shows" : "Selected Items (\(selectedItems.count))"
+            self.collectionView?.reloadItems(at: [IndexPath(item: indexPath.row, section: 0)])
         }
     }
 }
@@ -283,7 +299,7 @@ extension ListController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if self.lastContentOffset > scrollView.contentOffset.y {
+        if self.lastContentOffset > scrollView.contentOffset.y || scrollView.contentOffset.y == -64.0 {
             // uping
             UIView.animate(withDuration: 0.3, animations: {
                 self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)

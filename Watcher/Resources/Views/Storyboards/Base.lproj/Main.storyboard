@@ -43,7 +43,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="250" height="375"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="v65-kc-DBe">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="v65-kc-DBe">
                                                     <rect key="frame" x="-0.5" y="0.0" width="250" height="375"/>
                                                 </imageView>
                                             </subviews>
@@ -114,26 +114,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i9R-2e-sUB">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ypv-zh-A4e">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="1" id="KV3-1v-uJe">
+                                    <size key="itemSize" width="157" height="218"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="listId" id="qbU-8g-yct" customClass="ListCVCell" customModule="Watcher" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="157" height="218"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="157" height="218"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P98-2e-cml">
+                                                    <rect key="frame" x="0.0" y="0.0" width="157" height="218"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="P98-2e-cml" secondAttribute="trailing" id="Clb-f2-rnQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="P98-2e-cml" secondAttribute="bottom" id="Yzi-kM-EnM"/>
+                                            <constraint firstItem="P98-2e-cml" firstAttribute="leading" secondItem="qbU-8g-yct" secondAttribute="leading" id="evw-YK-eoj"/>
+                                            <constraint firstItem="P98-2e-cml" firstAttribute="top" secondItem="qbU-8g-yct" secondAttribute="top" id="pej-zD-ZXX"/>
+                                            <constraint firstAttribute="trailing" secondItem="P98-2e-cml" secondAttribute="trailing" id="wpz-qV-SmZ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="photo" destination="P98-2e-cml" id="IgV-rw-ddc"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="pUA-HX-yoJ" id="Dks-Xe-0Je"/>
-                                    <outlet property="delegate" destination="pUA-HX-yoJ" id="ZF1-RX-Aae"/>
+                                    <outlet property="dataSource" destination="pUA-HX-yoJ" id="JkK-3u-thJ"/>
+                                    <outlet property="delegate" destination="pUA-HX-yoJ" id="8fX-3D-zIG"/>
                                 </connections>
-                            </tableView>
+                            </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i9R-2e-sUB" firstAttribute="leading" secondItem="Gyx-u0-1NQ" secondAttribute="leading" id="D6q-tE-AS0"/>
-                            <constraint firstItem="i9R-2e-sUB" firstAttribute="top" secondItem="CQD-Tq-nu4" secondAttribute="top" id="HEF-hS-lTB"/>
-                            <constraint firstItem="i9R-2e-sUB" firstAttribute="bottom" secondItem="Gyx-u0-1NQ" secondAttribute="bottom" id="ICQ-rN-Hfg"/>
-                            <constraint firstItem="i9R-2e-sUB" firstAttribute="trailing" secondItem="Gyx-u0-1NQ" secondAttribute="trailing" id="Lcb-Uz-grp"/>
+                            <constraint firstItem="Ypv-zh-A4e" firstAttribute="bottom" secondItem="Gyx-u0-1NQ" secondAttribute="bottom" id="B9C-u3-RvF"/>
+                            <constraint firstItem="Ypv-zh-A4e" firstAttribute="top" secondItem="CQD-Tq-nu4" secondAttribute="top" id="DfK-Ic-EfR"/>
+                            <constraint firstItem="Ypv-zh-A4e" firstAttribute="trailing" secondItem="Gyx-u0-1NQ" secondAttribute="trailing" id="Plf-Xe-ElF"/>
+                            <constraint firstItem="Ypv-zh-A4e" firstAttribute="leading" secondItem="Gyx-u0-1NQ" secondAttribute="leading" id="kBP-P4-cLj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gyx-u0-1NQ"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="i9R-2e-sUB" id="0K6-2d-eD2"/>
+                        <outlet property="collectionView" destination="Ypv-zh-A4e" id="bp1-nJ-5sO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZVY-G9-HPQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -589,7 +620,7 @@ asd</string>
     <resources>
         <image name="back" width="512" height="512"/>
         <image name="calendar" width="225" height="225"/>
-        <image name="check" width="338" height="335"/>
+        <image name="check" width="50" height="50"/>
         <image name="film" width="386" height="386"/>
         <image name="play-button" width="32" height="32"/>
         <image name="rate" width="256" height="256"/>

@@ -282,7 +282,7 @@ extension DetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return menuSegmented
+        return videos.count != 0 ? menuSegmented : UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
