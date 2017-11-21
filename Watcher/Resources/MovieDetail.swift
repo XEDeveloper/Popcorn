@@ -20,11 +20,12 @@ struct MovieDetail {
     var vote_average: Double?
     var vote_count: Int?
     var release_date: String?
+    var character: String?
     
     var isError: Bool
     var message: String?
     
-    init(id: Int, title: String, poster_path: String, backdrop_path: String, overview: String, vote_average: Double, vote_count: Int, release_date: String, isError: Bool, message: String) {
+    init(id: Int, title: String, poster_path: String, backdrop_path: String, overview: String, vote_average: Double, vote_count: Int, release_date: String, isError: Bool, message: String, character: String) {
         
         self.id = id
         self.title = title
@@ -36,6 +37,7 @@ struct MovieDetail {
         self.release_date = release_date
         self.isError = isError
         self.message = message
+        self.character = character
     }
     
     init(json: JSON) {
@@ -48,6 +50,9 @@ struct MovieDetail {
         backdrop_path = json["backdrop_path"].stringValue
         overview = json["overview"].stringValue
         vote_average = json["vote_average"].double
+        if vote_average == nil {
+            vote_average = json["vote"].double
+        }
         vote_count = json["vote_count"].int
         release_date = json["release_date"].stringValue
         if release_date == "" {
@@ -55,6 +60,7 @@ struct MovieDetail {
         }
         isError = false
         message = "success"
+        character = json["character"].stringValue
     }
     
     init(data: NSManagedObject) {
@@ -66,7 +72,8 @@ struct MovieDetail {
         vote_average = data.value(forKey: "vote_average") as? Double
         vote_count = data.value(forKey: "vote_count") as? Int
         release_date = data.value(forKey: "release_date") as? String
-
+        character = data.value(forKey: "character") as? String
+        
         isError = false
         message = "success"
     }

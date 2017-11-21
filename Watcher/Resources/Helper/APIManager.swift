@@ -21,6 +21,7 @@ class APIManager {
     static let getMoviesEndpoint = "/discover\(getMovieEndpoint)"
     static let getSearchEndpoint = "/search\(getMovieEndpoint)"
     let getVideosEndpoint = "/videos"
+    let person = "/person"
     let languageUS = "&language=en-US"
     
     var sortDict = [
@@ -100,6 +101,26 @@ class APIManager {
     func getShowDetails(id: Int, details: String, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         
         let url = baseURL + (Default.isSeries() ? APIManager.getTvEndpoint : APIManager.getMovieEndpoint) + "/\(id)" + "?api_key=\(apiKey)\(languageUS)&append_to_response=\(details)"
+        print(url)
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
+                
+                if let status = response.response?.statusCode {
+                    switch(status) {
+                    case 200:
+                        if let result = response.result.value {
+                            onSuccess(JSON(result))
+                        }
+                    default:
+                        print("request failed")
+                    }
+                }
+        }
+    }
+    
+    func getPersonDetails(id: Int, shows: Bool = false, onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+        
+        let url = baseURL + person + "/\(id)" + "\(shows ? "/movie_credits" : "")" + "?api_key=\(apiKey)\(languageUS)"
         print(url)
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
             .responseJSON { response in

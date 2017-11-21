@@ -57,6 +57,9 @@
 		3007E94A1F9D819900E2218C /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E9491F9D819900E2218C /* DetailsRouter.swift */; };
 		3007E94C1F9D81A200E2218C /* DetailsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E94B1F9D81A200E2218C /* DetailsConfiguration.swift */; };
 		3007E94E1F9D81AE00E2218C /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007E94D1F9D81AE00E2218C /* DetailsController.swift */; };
+		30202D671FC3DCAE003B7279 /* PersonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30202D661FC3DCAD003B7279 /* PersonDetailsViewController.swift */; };
+		30202D691FC41885003B7279 /* PersonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30202D681FC41885003B7279 /* PersonDetail.swift */; };
+		30202D6B1FC4248B003B7279 /* PersonShowsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30202D6A1FC4248B003B7279 /* PersonShowsTVCell.swift */; };
 		302F289F1FB4248D000F517D /* VideosTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F289E1FB4248D000F517D /* VideosTVCell.swift */; };
 		302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A01FB424B1000F517D /* SeasonTVCell.swift */; };
 		302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A21FB424BE000F517D /* CastTVCell.swift */; };
@@ -151,6 +154,9 @@
 		3007E9491F9D819900E2218C /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		3007E94B1F9D81A200E2218C /* DetailsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsConfiguration.swift; sourceTree = "<group>"; };
 		3007E94D1F9D81AE00E2218C /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
+		30202D661FC3DCAD003B7279 /* PersonDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsViewController.swift; sourceTree = "<group>"; };
+		30202D681FC41885003B7279 /* PersonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetail.swift; sourceTree = "<group>"; };
+		30202D6A1FC4248B003B7279 /* PersonShowsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonShowsTVCell.swift; sourceTree = "<group>"; };
 		302F289E1FB4248D000F517D /* VideosTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTVCell.swift; sourceTree = "<group>"; };
 		302F28A01FB424B1000F517D /* SeasonTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTVCell.swift; sourceTree = "<group>"; };
 		302F28A21FB424BE000F517D /* CastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTVCell.swift; sourceTree = "<group>"; };
@@ -271,6 +277,8 @@
 				3003DA401F98A01D00D42EDF /* Views */,
 				3003D9ED1F989A1400D42EDF /* Scenes */,
 				30F640201F9DB6CD005BC903 /* MovieDetail.swift */,
+				30202D681FC41885003B7279 /* PersonDetail.swift */,
+				30202D661FC3DCAD003B7279 /* PersonDetailsViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -379,6 +387,7 @@
 				302F28A01FB424B1000F517D /* SeasonTVCell.swift */,
 				302F28A21FB424BE000F517D /* CastTVCell.swift */,
 				302F28A41FB46DC8000F517D /* SimilarTVCell.swift */,
+				30202D6A1FC4248B003B7279 /* PersonShowsTVCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -781,6 +790,7 @@
 				3003DA1B1F989B9C00D42EDF /* HomeInteractor.swift in Sources */,
 				30DE65941F9F628E000F6D51 /* FilterController.swift in Sources */,
 				3003DA0D1F989B3B00D42EDF /* SettingsModel.swift in Sources */,
+				30202D671FC3DCAE003B7279 /* PersonDetailsViewController.swift in Sources */,
 				304848F91FC2D541007BBCC1 /* DataManager.swift in Sources */,
 				30F640211F9DB6CD005BC903 /* MovieDetail.swift in Sources */,
 				3003DA011F989AF600D42EDF /* LoginController.swift in Sources */,
@@ -793,6 +803,7 @@
 				3003DA2D1F989C1200D42EDF /* ProfileModel.swift in Sources */,
 				3003D9BF1F989A0000D42EDF /* AppDelegate.swift in Sources */,
 				3007E9461F9D818C00E2218C /* DetailsInteractor.swift in Sources */,
+				30202D6B1FC4248B003B7279 /* PersonShowsTVCell.swift in Sources */,
 				3003DA3D1F989C6500D42EDF /* ListWorker.swift in Sources */,
 				3003DA271F989BF700D42EDF /* SettingsConfigurator.swift in Sources */,
 				3003DA0F1F989B4200D42EDF /* SettingsPresenter.swift in Sources */,
@@ -809,6 +820,7 @@
 				3003DA211F989BB200D42EDF /* HomeWorker.swift in Sources */,
 				3007E9481F9D819300E2218C /* DetailsWorker.swift in Sources */,
 				302F28A11FB424B1000F517D /* SeasonTVCell.swift in Sources */,
+				30202D691FC41885003B7279 /* PersonDetail.swift in Sources */,
 				302F289F1FB4248D000F517D /* VideosTVCell.swift in Sources */,
 				3003DA431F98A04700D42EDF /* ListCVCell.swift in Sources */,
 				30C367641F999AD000A242CF /* Category.swift in Sources */,

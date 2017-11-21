@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import AVFoundation
+import SwiftyJSON
 
 class DetailsController: UIViewController {
 
@@ -32,8 +33,8 @@ class DetailsController: UIViewController {
     
     var videos: [NSDictionary] = []
     var seasons: [NSDictionary] = []
-    var casts: [NSDictionary] = []
-    var similars: [NSDictionary] = []
+    var casts: [PersonDetail] = []
+    var similars: [MovieDetail] = []
     
     // MARK: - View Life Cycle
     
@@ -51,11 +52,7 @@ class DetailsController: UIViewController {
             ratingLabel.text = "\(String(format: "%.1f", movie.vote_average!))"
             dateLabel.text = movie.release_date
             
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = view.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            backgroundImageView.addSubview(blurEffectView)
+            backgroundImageView.blur()
             
             fireShowDetails()
         }
@@ -76,6 +73,7 @@ class DetailsController: UIViewController {
         if !Default.isSeries() {
             menuTabs.remove(at: 1)
         }
+        
         menuSegmented = UISegmentedControl(items: menuTabs)
         menuSegmented.tintColor = .orange
         menuSegmented.selectedSegmentIndex = 0
@@ -131,7 +129,7 @@ class DetailsController: UIViewController {
         if let movieID = movie.id {
             let manager = APIManager()
             manager.getShowDetails(id: movieID, details: details(), onSuccess: { json in
-//                print(json["similar"])
+
                 let results = json["videos"]["results"].array
                 for item in results! {
                     self.videos.append(["title": item["name"].stringValue, "link": item["key"].stringValue])
@@ -147,12 +145,13 @@ class DetailsController: UIViewController {
                 
                 let casts = json["credits"]["cast"].array
                 for item in casts! {
-                    self.casts.append(["character": item["character"].stringValue, "actor": item["name"].stringValue, "profile_path": item["profile_path"].stringValue])
+                    self.casts.append(PersonDetail(json: item))
+//                    self.casts.append(["id": item["id"], "character": item["character"].stringValue, "actor": item["name"].stringValue, "profile_path": item["profile_path"].stringValue])
                 }
                 
                 let similars = json["similar"]["results"].array
                 for item in similars! {
-                    self.similars.append(["name": item["name"].stringValue, "overview": item["overview"].stringValue, "backdrop_path": item["backdrop_path"].stringValue, "poster_path": item["poster_path"].stringValue, "vote": item["vote_average"].stringValue])
+                    self.similars.append(MovieDetail(json: item))
                 }
                 
                 if Default.isSeries() {
@@ -194,11 +193,19 @@ class DetailsController: UIViewController {
     }
     
     func viewActor(withIndex index: Int) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+        vc.person = casts[index]
+        let root = UINavigationController(rootViewController: vc)
+//        navigationController?.pushViewController(vc, animated: true)
+        present(root, animated: true, completion: nil)
     }
     
     func gotoShow(withIndex index: Int) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "detailsVC") as! DetailsController
+        vc.movie = similars[index]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -254,11 +261,13 @@ extension DetailsController: UITableViewDataSource {
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             let cast = casts[indexPath.row]
-            var poster = (cast["profile_path"] as! String)
-            poster.remove(at: poster.startIndex)
-            cell.photoImageView.setImageFrom(url: "/" + poster, with: true)
-            cell.realNameLabel.text = (cast["actor"] as! String)
-            cell.characterNameLabel.text = (cast["character"] as! String)
+            var poster = cast.photo//(cast["profile_path"] as! String)
+//            if poster?.count != 0 {
+//                poster.remove(at: poster.startIndex)
+//            }
+            cell.photoImageView.setImageFrom(url: "/" + poster!, with: true)
+            cell.realNameLabel.text = cast.name//(cast["actor"] as! String)
+            cell.characterNameLabel.text = cast.character//(cast["character"] as! String)
             
             return cell
             
@@ -268,12 +277,12 @@ extension DetailsController: UITableViewDataSource {
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             let similar = similars[indexPath.row]
-            var poster = (similar["poster_path"] as! String)
-            poster.remove(at: poster.startIndex)
-            cell.photoImageView.setImageFrom(url: "/" + poster, with: true)
-            cell.titleLabel.text = (similar["name"] as! String)
-            cell.overviewLabel.text = (similar["overview"] as! String)
-            cell.rateLabel.text = (similar["vote"] as! String)
+//            var poster = (similar["poster_path"] as! String)
+//            poster.remove(at: poster.startIndex)
+            cell.photoImageView.setImageFrom(url: similar.poster_path!, with: true)
+            cell.titleLabel.text = similar.title//(similar["name"] as! String)
+            cell.overviewLabel.text = similar.overview//(similar["overview"] as! String)
+            cell.rateLabel.text = String(similar.vote_average!)//(similar["vote"] as! String)
             
             return cell
         }
