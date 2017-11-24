@@ -25,7 +25,6 @@ class PersonDetailsViewController: UIViewController {
     var person: PersonDetail!
     
     var shows: [MovieDetail] = []
-    
     var lastContentOffset: CGFloat = 0.0
     
     var isFullBiography = false
@@ -106,6 +105,7 @@ class PersonDetailsViewController: UIViewController {
         let safariVC = SFSafariViewController(url: URL(string: "http://www.imdb.com/name/\(person.imdb_id!)/")!)
         self.present(safariVC, animated: true, completion: nil)
     }
+
 }
 
 extension PersonDetailsViewController: UITableViewDataSource {

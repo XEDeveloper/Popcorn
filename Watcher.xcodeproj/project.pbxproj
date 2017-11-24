@@ -65,6 +65,9 @@
 		302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A21FB424BE000F517D /* CastTVCell.swift */; };
 		302F28A51FB46DC8000F517D /* SimilarTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F28A41FB46DC8000F517D /* SimilarTVCell.swift */; };
 		304848F91FC2D541007BBCC1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304848F81FC2D541007BBCC1 /* DataManager.swift */; };
+		3063AF3B1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063AF391FC6DB1C009A9FE0 /* ProfileHeaderCVCell.swift */; };
+		3063AF3C1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3063AF3A1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.xib */; };
+		3063AF3E1FC6DCB7009A9FE0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063AF3D1FC6DCB7009A9FE0 /* ProfileViewController.swift */; };
 		309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309D69F31FAC4FD9000802E1 /* UserDefaults.swift */; };
 		30C367641F999AD000A242CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367631F999AD000A242CF /* Category.swift */; };
 		30C367671F99A2DC00A242CF /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */; };
@@ -162,6 +165,9 @@
 		302F28A21FB424BE000F517D /* CastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTVCell.swift; sourceTree = "<group>"; };
 		302F28A41FB46DC8000F517D /* SimilarTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarTVCell.swift; sourceTree = "<group>"; };
 		304848F81FC2D541007BBCC1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		3063AF391FC6DB1C009A9FE0 /* ProfileHeaderCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCVCell.swift; sourceTree = "<group>"; };
+		3063AF3A1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderCVCell.xib; sourceTree = "<group>"; };
+		3063AF3D1FC6DCB7009A9FE0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		309D69F31FAC4FD9000802E1 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		30C367631F999AD000A242CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		30C367661F99A2DC00A242CF /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 				3003D9EF1F989A5A00D42EDF /* Settings */,
 				30D01C3E1FA71B490001B9F1 /* WebViewController.swift */,
 				30F866121FB5A73100F2D665 /* RecordsController.swift */,
+				3063AF3D1FC6DCB7009A9FE0 /* ProfileViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -388,6 +395,8 @@
 				302F28A21FB424BE000F517D /* CastTVCell.swift */,
 				302F28A41FB46DC8000F517D /* SimilarTVCell.swift */,
 				30202D6A1FC4248B003B7279 /* PersonShowsTVCell.swift */,
+				3063AF391FC6DB1C009A9FE0 /* ProfileHeaderCVCell.swift */,
+				3063AF3A1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -590,6 +599,7 @@
 				3003D9C91F989A0000D42EDF /* LaunchScreen.storyboard in Resources */,
 				3003D9C61F989A0000D42EDF /* Assets.xcassets in Resources */,
 				3003D9C41F989A0000D42EDF /* Main.storyboard in Resources */,
+				3063AF3C1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +786,7 @@
 				3003DA351F989C4800D42EDF /* ListConfigurator.swift in Sources */,
 				3003DA091F989B1A00D42EDF /* SettingsController.swift in Sources */,
 				309D69F41FAC4FD9000802E1 /* UserDefaults.swift in Sources */,
+				3063AF3E1FC6DCB7009A9FE0 /* ProfileViewController.swift in Sources */,
 				302F28A31FB424BE000F517D /* CastTVCell.swift in Sources */,
 				3003DA311F989C2500D42EDF /* ProfileWorker.swift in Sources */,
 				3003DA151F989B5900D42EDF /* SettingsRouter.swift in Sources */,
@@ -794,6 +805,7 @@
 				304848F91FC2D541007BBCC1 /* DataManager.swift in Sources */,
 				30F640211F9DB6CD005BC903 /* MovieDetail.swift in Sources */,
 				3003DA011F989AF600D42EDF /* LoginController.swift in Sources */,
+				3063AF3B1FC6DB1C009A9FE0 /* ProfileHeaderCVCell.swift in Sources */,
 				3003D9FB1F989ABD00D42EDF /* LoginInteractor.swift in Sources */,
 				3007E9441F9D818600E2218C /* DetailsPresenter.swift in Sources */,
 				3003DA191F989B9400D42EDF /* HomeConfigurator.swift in Sources */,

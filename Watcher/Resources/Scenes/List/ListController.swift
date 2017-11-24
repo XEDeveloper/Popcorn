@@ -313,7 +313,6 @@ extension ListController: UIScrollViewDelegate {
         
         self.lastContentOffset = scrollView.contentOffset.y
     }
-    
 }
 
 extension ListController: UISearchBarDelegate {
