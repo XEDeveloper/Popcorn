@@ -105,16 +105,16 @@
 /* Begin PBXFileReference section */
 		01F9B4C7EEDE2FC711A4D53C /* Pods-Watcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watcher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Watcher/Pods-Watcher.debug.xcconfig"; sourceTree = "<group>"; };
 		120FCEDB89946C773E87D52C /* Pods-WatcherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatcherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatcherTests/Pods-WatcherTests.release.xcconfig"; sourceTree = "<group>"; };
-		3003D9BB1F989A0000D42EDF /* Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3003D9BB1F989A0000D42EDF /* Popcorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popcorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3003D9BE1F989A0000D42EDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3003D9C31F989A0000D42EDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3003D9C51F989A0000D42EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3003D9C81F989A0000D42EDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3003D9CA1F989A0000D42EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3003D9CF1F989A0000D42EDF /* WatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3003D9CF1F989A0000D42EDF /* PopcornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopcornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3003D9D31F989A0000D42EDF /* WatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatcherTests.swift; sourceTree = "<group>"; };
 		3003D9D51F989A0000D42EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3003D9DA1F989A0000D42EDF /* WatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3003D9DA1F989A0000D42EDF /* PopcornUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopcornUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3003D9DE1F989A0000D42EDF /* WatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatcherUITests.swift; sourceTree = "<group>"; };
 		3003D9E01F989A0000D42EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3003D9F61F989AAB00D42EDF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -247,9 +247,9 @@
 		3003D9BC1F989A0000D42EDF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3003D9BB1F989A0000D42EDF /* Watcher.app */,
-				3003D9CF1F989A0000D42EDF /* WatcherTests.xctest */,
-				3003D9DA1F989A0000D42EDF /* WatcherUITests.xctest */,
+				3003D9BB1F989A0000D42EDF /* Popcorn.app */,
+				3003D9CF1F989A0000D42EDF /* PopcornTests.xctest */,
+				3003D9DA1F989A0000D42EDF /* PopcornUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,9 +492,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3003D9BA1F989A0000D42EDF /* Watcher */ = {
+		3003D9BA1F989A0000D42EDF /* Popcorn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3003D9E31F989A0000D42EDF /* Build configuration list for PBXNativeTarget "Watcher" */;
+			buildConfigurationList = 3003D9E31F989A0000D42EDF /* Build configuration list for PBXNativeTarget "Popcorn" */;
 			buildPhases = (
 				A0903DFDA5C18D551E169DC3 /* [CP] Check Pods Manifest.lock */,
 				3003D9B71F989A0000D42EDF /* Sources */,
@@ -507,14 +507,14 @@
 			);
 			dependencies = (
 			);
-			name = Watcher;
+			name = Popcorn;
 			productName = Watcher;
-			productReference = 3003D9BB1F989A0000D42EDF /* Watcher.app */;
+			productReference = 3003D9BB1F989A0000D42EDF /* Popcorn.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3003D9CE1F989A0000D42EDF /* WatcherTests */ = {
+		3003D9CE1F989A0000D42EDF /* PopcornTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3003D9E61F989A0000D42EDF /* Build configuration list for PBXNativeTarget "WatcherTests" */;
+			buildConfigurationList = 3003D9E61F989A0000D42EDF /* Build configuration list for PBXNativeTarget "PopcornTests" */;
 			buildPhases = (
 				D1914BCBF612C94EC34BF60A /* [CP] Check Pods Manifest.lock */,
 				3003D9CB1F989A0000D42EDF /* Sources */,
@@ -528,14 +528,14 @@
 			dependencies = (
 				3003D9D11F989A0000D42EDF /* PBXTargetDependency */,
 			);
-			name = WatcherTests;
+			name = PopcornTests;
 			productName = WatcherTests;
-			productReference = 3003D9CF1F989A0000D42EDF /* WatcherTests.xctest */;
+			productReference = 3003D9CF1F989A0000D42EDF /* PopcornTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3003D9D91F989A0000D42EDF /* WatcherUITests */ = {
+		3003D9D91F989A0000D42EDF /* PopcornUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3003D9E91F989A0000D42EDF /* Build configuration list for PBXNativeTarget "WatcherUITests" */;
+			buildConfigurationList = 3003D9E91F989A0000D42EDF /* Build configuration list for PBXNativeTarget "PopcornUITests" */;
 			buildPhases = (
 				94DA0CB68E2A6DAB1E1B32A0 /* [CP] Check Pods Manifest.lock */,
 				3003D9D61F989A0000D42EDF /* Sources */,
@@ -549,9 +549,9 @@
 			dependencies = (
 				3003D9DC1F989A0000D42EDF /* PBXTargetDependency */,
 			);
-			name = WatcherUITests;
+			name = PopcornUITests;
 			productName = WatcherUITests;
-			productReference = 3003D9DA1F989A0000D42EDF /* WatcherUITests.xctest */;
+			productReference = 3003D9DA1F989A0000D42EDF /* PopcornUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -580,7 +580,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3003D9B61F989A0000D42EDF /* Build configuration list for PBXProject "Watcher" */;
+			buildConfigurationList = 3003D9B61F989A0000D42EDF /* Build configuration list for PBXProject "Popcorn" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -593,9 +593,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3003D9BA1F989A0000D42EDF /* Watcher */,
-				3003D9CE1F989A0000D42EDF /* WatcherTests */,
-				3003D9D91F989A0000D42EDF /* WatcherUITests */,
+				3003D9BA1F989A0000D42EDF /* Popcorn */,
+				3003D9CE1F989A0000D42EDF /* PopcornTests */,
+				3003D9D91F989A0000D42EDF /* PopcornUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -880,12 +880,12 @@
 /* Begin PBXTargetDependency section */
 		3003D9D11F989A0000D42EDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3003D9BA1F989A0000D42EDF /* Watcher */;
+			target = 3003D9BA1F989A0000D42EDF /* Popcorn */;
 			targetProxy = 3003D9D01F989A0000D42EDF /* PBXContainerItemProxy */;
 		};
 		3003D9DC1F989A0000D42EDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3003D9BA1F989A0000D42EDF /* Watcher */;
+			target = 3003D9BA1F989A0000D42EDF /* Popcorn */;
 			targetProxy = 3003D9DB1F989A0000D42EDF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1027,8 +1027,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rjconstantino.Watcher;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rjconstantino.Popcorn;
+				PRODUCT_NAME = Popcorn;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1044,8 +1044,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rjconstantino.Watcher;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rjconstantino.Popcorn;
+				PRODUCT_NAME = Popcorn;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1064,7 +1064,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Watcher.app/Watcher";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Popcorn.app/Popcorn";
 			};
 			name = Debug;
 		};
@@ -1081,7 +1081,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Watcher.app/Watcher";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Popcorn.app/Popcorn";
 			};
 			name = Release;
 		};
@@ -1120,7 +1120,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3003D9B61F989A0000D42EDF /* Build configuration list for PBXProject "Watcher" */ = {
+		3003D9B61F989A0000D42EDF /* Build configuration list for PBXProject "Popcorn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3003D9E11F989A0000D42EDF /* Debug */,
@@ -1129,7 +1129,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3003D9E31F989A0000D42EDF /* Build configuration list for PBXNativeTarget "Watcher" */ = {
+		3003D9E31F989A0000D42EDF /* Build configuration list for PBXNativeTarget "Popcorn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3003D9E41F989A0000D42EDF /* Debug */,
@@ -1138,7 +1138,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3003D9E61F989A0000D42EDF /* Build configuration list for PBXNativeTarget "WatcherTests" */ = {
+		3003D9E61F989A0000D42EDF /* Build configuration list for PBXNativeTarget "PopcornTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3003D9E71F989A0000D42EDF /* Debug */,
@@ -1147,7 +1147,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3003D9E91F989A0000D42EDF /* Build configuration list for PBXNativeTarget "WatcherUITests" */ = {
+		3003D9E91F989A0000D42EDF /* Build configuration list for PBXNativeTarget "PopcornUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3003D9EA1F989A0000D42EDF /* Debug */,
