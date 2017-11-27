@@ -15,6 +15,22 @@ class Category: NSObject {
 
 extension UIViewController {
     
+    func presentController(withName name: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: name)
+        let root = UINavigationController(rootViewController: vc)
+        self.present(root, animated: true, completion: nil)
+    }
+    
+    func presentListController(withTitle title: String = "", shows: [MovieDetail] = []) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ListController") as! ListController
+        vc.title = title
+        vc.shows = shows
+        let root = UINavigationController(rootViewController: vc)
+        self.present(root, animated: true, completion: nil)
+    }
+    
 }
 
 extension UIView {

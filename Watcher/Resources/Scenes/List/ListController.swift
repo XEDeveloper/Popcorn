@@ -49,12 +49,12 @@ class ListController: UIViewController, ListControllerInput {
 
         // Do any additional setup after loading the view.
         
-        normalNavigationBar()
-        navigationController?.navigationBar.tintColor = .orange
-        initSearchBar()
+//        normalNavigationBar()
+        
+//        initSearchBar()
         
 //        output.fetchItems(request: ListModel.Fetch.Request(itemId: 123))
-
+        initNavigationBar()
         fireShows()
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -63,6 +63,8 @@ class ListController: UIViewController, ListControllerInput {
         collectionView.addGestureRecognizer(longPress)
         
         watchedShowsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showWatchedShows)))
+        
+//        self.presentController(withName: "ProfileViewController")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +72,7 @@ class ListController: UIViewController, ListControllerInput {
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .compact)
     }
 
-    
+
     func initSearchBar() {
         searchBar.sizeToFit()
         searchBar.placeholder = "Type title here..."
@@ -88,6 +90,24 @@ class ListController: UIViewController, ListControllerInput {
         navigationItem.rightBarButtonItem = nil
     }
     
+    func initNavigationBar() {
+        navigationController?.navigationBar.tintColor = .orange
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
+        if self.title == nil || self.title == "" {
+            self.title = nil
+            initSearchBar()
+            navigationItem.titleView = searchBar
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(tappedFilter))
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.titleView = nil
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(tappedClose))
+            navigationItem.rightBarButtonItem = nil
+            watchedShowsView.isHidden = true
+        }
+    }
+    
     func selectingNavigationBar() {
         navigationItem.titleView = nil
         title = "Selected Item (\(DataManager.fetchData().count))"
@@ -96,10 +116,11 @@ class ListController: UIViewController, ListControllerInput {
     }
     
     @objc func showWatchedShows() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "RecordsController") as! RecordsController
-        let root = UINavigationController(rootViewController: vc)
-        present(root, animated: true, completion: nil)
+        self.presentController(withName: "ProfileViewController")
+    }
+    
+    @objc func tappedClose() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func cancelSelection() {
@@ -299,19 +320,19 @@ extension ListController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if self.lastContentOffset > scrollView.contentOffset.y || scrollView.contentOffset.y == -64.0 {
-            // uping
-            UIView.animate(withDuration: 0.3, animations: {
-                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
-            })
-        } else if self.lastContentOffset < scrollView.contentOffset.y {
-            // downing
-            UIView.animate(withDuration: 0.3, animations: {
-                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 48.0)
-            })
-        }
-        
-        self.lastContentOffset = scrollView.contentOffset.y
+//        if self.lastContentOffset > scrollView.contentOffset.y || scrollView.contentOffset.y == -64.0 {
+//            // uping
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+//            })
+//        } else if self.lastContentOffset < scrollView.contentOffset.y {
+//            // downing
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.watchedShowsView.transform = CGAffineTransform(translationX: 0.0, y: 48.0)
+//            })
+//        }
+//
+//        self.lastContentOffset = scrollView.contentOffset.y
     }
 }
 

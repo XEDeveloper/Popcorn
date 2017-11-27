@@ -46,7 +46,7 @@ class PersonDetailsViewController: UIViewController {
         backgroundImageView.blur()
         
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0)
+//        tableView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0)
         
         firePersonDetails()
         biographyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedBiography)))
@@ -154,14 +154,16 @@ extension PersonDetailsViewController: UIScrollViewDelegate {
             // downing
             if scrollView.contentOffset.y >= 110.0 && title == nil {
                 self.title = "Movies And TV Shows"
-                let photo = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
-                photo.image = self.backgroundImageView.image
+                self.title = person.name! + (person.name?.last == "s" ? "' Shows" : "'s Shows")
+                let photo = UIImageView(image: self.backgroundImageView.image) //UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
+//                photo.image = self.backgroundImageView.image
+                photo.frame = CGRect(x: 110, y: 110, width: 36, height: 36)
                 photo.layer.cornerRadius = photo.frame.size.width / 2
                 photo.layer.borderWidth = 2.0
                 photo.layer.borderColor = UIColor.orange.cgColor
                 photo.clipsToBounds = true
                 
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: photo)
+//                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: photo)
             }
         }
         

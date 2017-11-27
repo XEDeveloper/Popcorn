@@ -25,11 +25,17 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(tappedClose))
         collectionView.registerCell(withName: "ProfileHeaderCVCell")
         
         fireShows()
+        
     }
 
+    @objc func tappedClose() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func fireShows() {
         hasPendingRequest = true
         manager.fetchShows(withPage: page, onSuccess: { json in
@@ -76,12 +82,23 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
 }
 
+extension ProfileViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "detailsVC") as! DetailsController
+        vc.movie = shows[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.width * 0.75)
+            return CGSize(width: collectionView.bounds.size.width, height: 312.0)//collectionView.bounds.size.width * 0.75)
         }
         
         let width = (UIScreen.main.bounds.width / 3) - 1
@@ -102,6 +119,14 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ProfileViewController: ProfileHeaderCVCellDelegate {
+    
+    func didTapRecommended(cell: ProfileHeaderCVCell) {
+        self.presentListController(withTitle: "Recommended Shows", shows: shows)
+    }
+    
+    func didTapWatchingSoon(cell: ProfileHeaderCVCell) {
+        self.presentListController(withTitle: "Watching Soon", shows: shows)
+    }
     
     func didTapMovies(cell: ProfileHeaderCVCell) {
         Default.setIsSeries(false)
